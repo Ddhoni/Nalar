@@ -34,12 +34,13 @@ services:
       context: ./apps/web
     container_name: nalar-web
     ports:
-      - "3000:3000"
+      - "3000:3001"
     environment:
       - TZ=Asia/Jakarta
+      - PORT=3001
     depends_on:
       - api
-    # Minimal memory limit: 64MB (Caddy is very lightweight)
+    # Minimal memory limit for Next.js
     deploy:
       resources:
         limits:
@@ -48,7 +49,7 @@ services:
           memory: 32M
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O-", "http://localhost:3000"]
+      test: ["CMD", "wget", "-q", "-O-", "http://localhost:3001"]
       interval: 30s
       timeout: 10s
       retries: 3

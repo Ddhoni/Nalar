@@ -23,6 +23,26 @@ export const productLinks = [
   { label: "Jurnal", href: "/products#jurnal" },
 ];
 
+export const insightsLinks = [
+  { label: "Blog", href: "/insights/blog" },
+  { label: "Case Studies", href: "/insights/case-studies" },
+  { label: "Reports", href: "/insights/reports" },
+  { label: "Resources", href: "/insights/resources" },
+];
+
+export const academyLinks = [
+  { label: "Courses", href: "/academy/courses" },
+  { label: "Workshops", href: "/academy/workshops" },
+  { label: "Tutorials", href: "/academy/tutorials" },
+];
+
+export const companyLinks = [
+  { label: "About", href: "/company/about" },
+  { label: "Team", href: "/company/team" },
+  { label: "Contact", href: "/company/contact" },
+  { label: "Careers", href: "/company/careers" },
+];
+
 export const footerLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Service", href: "/terms-of-service" },

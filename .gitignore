@@ -19,3 +19,6 @@ target/
 # IDE
 .vscode/
 .idea/
+
+# Next.js build backup
+.next_broken_*/

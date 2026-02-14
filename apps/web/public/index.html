@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nalar - AI, Data & Marketing Consulting</title>
+    <style>
+      :root {
+        --bg: #f4f7ff;
+        --text: #101426;
+        --muted: #5c6685;
+        --blue-700: #1f4fe0;
+        --blue-600: #2f59e8;
+        --blue-500: #4c73f3;
+        --line: #dce4ff;
+        --card: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 50% -10%, #e3ebff 0%, transparent 45%),
+          linear-gradient(180deg, #f8faff 0%, #f2f6ff 100%);
+        line-height: 1.5;
+      }
+
+      .container {
+        width: min(1120px, 92%);
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(8px);
+        background: rgba(248, 251, 255, 0.9);
+        border-bottom: 1px solid var(--line);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.9rem 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        min-width: 200px;
+        padding: 0.65rem 0.9rem;
+        border-radius: 10px;
+        color: #f7faff;
+        background:
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 58%),
+          linear-gradient(135deg, var(--blue-700) 0%, var(--blue-600) 55%, #3257db 100%);
+        box-shadow: 0 8px 20px rgba(31, 79, 224, 0.24);
+      }
+
+      .brand-name {
+        display: block;
+        font-size: 1.42rem;
+        letter-spacing: 0.22em;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .brand-tagline {
+        display: block;
+        margin-top: 0.28rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.02em;
+        color: rgba(247, 250, 255, 0.92);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.4rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .nav-links a:hover {
+        color: var(--blue-700);
+      }
+
+      .nav-action {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .mobile-controls {
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .mobile-btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .mobile-btn-dark {
+        background: #0f172a;
+        color: #fff;
+      }
+
+      .mobile-btn-light {
+        background: #ebf1ff;
+        color: #111827;
+      }
+
+      .saas-toggle {
+        border: 0;
+        background: #ebf1ff;
+        color: var(--text);
+        font-weight: 600;
+        font-size: 0.96rem;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        transition: 0.2s ease;
+      }
+
+      .saas-toggle:hover {
+        background: #dfe9ff;
+      }
+
+      .saas-toggle.active {
+        background: var(--blue-700);
+        color: #fff;
+      }
+
+      .saas-menu {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        padding: 0 1rem 1rem;
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity 150ms ease, transform 150ms ease;
+      }
+
+      .saas-menu.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .saas-menu-inner {
+        width: min(940px, 92%);
+        margin: 0 auto;
+        margin-top: 0.5rem;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 1.4rem;
+        box-shadow: 0 18px 40px rgba(30, 71, 184, 0.16);
+      }
+
+      .saas-menu-layout {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 220px 1fr;
+      }
+
+      .saas-menu-aside {
+        border-radius: 18px;
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-500) 100%);
+        color: #fff;
+      }
+
+      .saas-menu-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #dce7ff;
+        font-weight: 700;
+      }
+
+      .saas-menu-title {
+        font-size: 1.4rem;
+        margin-top: 0.4rem;
+      }
+
+      .saas-menu-note {
+        margin-top: 0.45rem;
+        color: #e9efff;
+        font-size: 0.9rem;
+      }
+
+      .saas-menu-grid {
+        margin-top: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .saas-menu-item {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #f8faff;
+        padding: 0.9rem;
+      }
+
+      .saas-menu-item:hover {
+        border-color: #bacbff;
+        background: #eef3ff;
+      }
+
+      .saas-menu-item strong {
+        display: block;
+      }
+
+      .saas-menu-item span {
+        display: block;
+        margin-top: 0.25rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero {
+        padding: 6rem 0 4.5rem;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.78rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--blue-700);
+        margin-bottom: 1.1rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        max-width: 760px;
+        font-size: clamp(2rem, 5.3vw, 4.2rem);
+        line-height: 1.03;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-sub {
+        max-width: 700px;
+        margin-top: 1.25rem;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.18rem);
+      }
+
+      .hero-actions {
+        margin-top: 1.8rem;
+        display: flex;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+      }
+
+      .focus-pill {
+        margin-top: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .focus-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #10b981;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.65);
+        animation: pulse 1.6s infinite;
+      }
+
+      .focus-value {
+        color: var(--blue-700);
+        font-weight: 700;
+      }
+
+      .btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 0.78rem 1.22rem;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.2s ease;
+      }
+
+      .btn-primary {
+        color: #fff;
+        background: var(--blue-700);
+      }
+
+      .btn-primary:hover {
+        background: #1b46ca;
+      }
+
+      .btn-secondary {
+        color: var(--text);
+        background: #e8eeff;
+      }
+
+      .btn-secondary:hover {
+        background: #dde6ff;
+      }
+
+      section {
+        padding: 3.6rem 0;
+      }
+
+      .section-title {
+        font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+        line-height: 1.15;
+        margin-bottom: 0.75rem;
+      }
+
+      .section-lead {
+        color: var(--muted);
+        max-width: 740px;
+      }
+
+      .services-grid {
+        margin-top: 1.8rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 1.2rem;
+      }
+
+      .card h3 {
+        font-size: 1.08rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .card p {
+        color: var(--muted);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+      }
+
+      .stat {
+        background: linear-gradient(135deg, #f5f8ff 0%, #edf3ff 100%);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 0.9rem;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.6rem;
+        color: var(--blue-700);
+        line-height: 1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .cases {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1.4rem;
+      }
+
+      .case {
+        background: #101a41;
+        color: #f4f7ff;
+        border-radius: 16px;
+        padding: 1.2rem;
+      }
+
+      .case small {
+        color: #9bb0ff;
+      }
+
+      .case p {
+        margin-top: 0.5rem;
+        color: #dde4ff;
+      }
+
+      .cta {
+        background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-500) 100%);
+        color: #fff;
+        border-radius: 18px;
+        padding: 1.7rem;
+        margin-top: 1.8rem;
+      }
+
+      .cta h3 {
+        font-size: clamp(1.3rem, 2.8vw, 2rem);
+        margin-bottom: 0.4rem;
+      }
+
+      .cta p {
+        color: #e9efff;
+      }
+
+      .cta a {
+        display: inline-block;
+        margin-top: 1rem;
+        background: #fff;
+        color: var(--blue-700);
+      }
+
+      .saas-products {
+        margin-top: 1.6rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .saas-featured {
+        background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-500) 100%);
+        color: #fff;
+      }
+
+      .saas-featured p {
+        color: #e9efff;
+      }
+
+      .mobile-menu {
+        border-top: 1px solid var(--line);
+        background: #fff;
+        padding: 0 0 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 150ms ease, opacity 150ms ease, padding 150ms ease;
+      }
+
+      .mobile-menu.open {
+        max-height: 420px;
+        opacity: 1;
+        padding: 0.85rem 0 1rem;
+      }
+
+      .mobile-links {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+      }
+
+      .mobile-links a {
+        display: block;
+        text-decoration: none;
+        color: var(--text);
+        border-radius: 12px;
+        padding: 0.75rem 0.85rem;
+        background: #f8faff;
+        border: 1px solid var(--line);
+        font-weight: 600;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+        }
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 1.4rem 0 2rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .brand-mark {
+          min-width: 180px;
+        }
+
+        .mobile-controls {
+          display: inline-flex;
+        }
+
+        .saas-menu-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <a class="brand" href="#">
+            <span class="brand-mark" aria-label="Nalar logo">
+              <span class="brand-name">NALAR</span>
+              <span class="brand-tagline">Empowering Growth with AI, Data &amp; Marketing</span>
+            </span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="#industries">Industries</a></li>
+            <li><a href="#offers">Offers</a></li>
+            <li><a href="#technologies">Technologies</a></li>
+            <li><a href="#insights">Insights</a></li>
+            <li><a href="#clients">Clients</a></li>
+            <li><a href="#company">Company</a></li>
+            <li><a href="#school-of-data">School of Data</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li class="nav-action">
+              <button class="saas-toggle" id="saasToggle" type="button" aria-expanded="false" aria-controls="saasMenu">
+                SaaS ▼
+              </button>
+            </li>
+          </ul>
+          <div class="mobile-controls">
+            <button class="mobile-btn mobile-btn-light" id="mobileSaasToggle" type="button">SaaS ▼</button>
+            <button class="mobile-btn mobile-btn-dark" id="mobileNavToggle" type="button">Menu ☰</button>
+          </div>
+        </nav>
+      </div>
+      <div class="mobile-menu" id="mobileNavMenu">
+        <div class="container mobile-links">
+          <a href="#industries">Industries</a>
+          <a href="#offers">Offers</a>
+          <a href="#technologies">Technologies</a>
+          <a href="#insights">Insights</a>
+          <a href="#clients">Clients</a>
+          <a href="#company">Company</a>
+          <a href="#school-of-data">School of Data</a>
+          <a href="#careers">Careers</a>
+        </div>
+      </div>
+      <div class="mobile-menu" id="mobileSaasMenu">
+        <div class="container mobile-links">
+          <a href="#untung">Untung</a>
+          <a href="#jurnal">Jurnal</a>
+        </div>
+      </div>
+      <div class="saas-menu" id="saasMenu">
+        <div class="saas-menu-inner">
+          <div class="saas-menu-layout">
+            <aside class="saas-menu-aside">
+              <p class="saas-menu-label">Product Suite</p>
+              <h3 class="saas-menu-title">Nalar SaaS</h3>
+              <p class="saas-menu-note">Pilih produk yang ingin kamu eksplorasi.</p>
+            </aside>
+            <div class="saas-menu-grid">
+              <a class="saas-menu-item" href="#untung">
+                <strong>Untung</strong>
+                <span>Monitoring KPI real-time, anomali alert, dan rekomendasi aksi.</span>
+              </a>
+              <a class="saas-menu-item" href="#jurnal">
+                <strong>Jurnal</strong>
+                <span>Ringkasan insight mingguan untuk fokus prioritas growth tim.</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <span class="eyebrow">Nalar Consulting</span>
+          <h1>AI is about people. Data is about impact.</h1>
+          <p class="hero-sub">
+            Kami bantu organisasi mengubah data menjadi pertumbuhan bisnis nyata, dari strategi hingga implementasi AI,
+            analytics, dan digital marketing.
+          </p>
+          <div class="focus-pill">
+            <span class="focus-dot" aria-hidden="true"></span>
+            Fokus saat ini:
+            <strong class="focus-value" id="focusValue">Revenue Growth</strong>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Mulai Konsultasi</a>
+            <a class="btn btn-secondary" href="#cases">Lihat Client Cases</a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 class="section-title">Explore Nalar</h2>
+          <p class="section-lead">Struktur section utama seperti navigasi modern consulting site untuk memudahkan eksplorasi layanan dan kapabilitas.</p>
+          <div class="services-grid">
+            <article class="card" id="industries">
+              <h3>Industries</h3>
+              <p>Retail, FMCG, finance, telco, dan sektor publik dengan pendekatan use case per industri.</p>
+            </article>
+            <article class="card" id="offers">
+              <h3>Offers</h3>
+              <p>Consulting sprint, implementation squad, dan managed analytics untuk kebutuhan pertumbuhan.</p>
+            </article>
+            <article class="card" id="technologies">
+              <h3>Technologies</h3>
+              <p>Cloud data stack, GenAI orchestration, BI, dan workflow automation untuk tim lintas fungsi.</p>
+            </article>
+            <article class="card" id="insights">
+              <h3>Insights</h3>
+              <p>Artikel, benchmark, dan playbook implementasi AI/data yang siap dieksekusi tim bisnis.</p>
+            </article>
+            <article class="card" id="clients">
+              <h3>Clients</h3>
+              <p>Kolaborasi dengan enterprise dan scale-up untuk mendorong dampak bisnis yang terukur.</p>
+            </article>
+            <article class="card" id="company">
+              <h3>Company</h3>
+              <p>Tentang Nalar, cara kerja, prinsip delivery, dan budaya eksekusi berbasis outcome.</p>
+            </article>
+            <article class="card" id="school-of-data">
+              <h3>School of Data</h3>
+              <p>Program pembelajaran praktis untuk analytics, experimentation, dan AI adoption.</p>
+            </article>
+            <article class="card" id="careers">
+              <h3>Careers</h3>
+              <p>Kesempatan bergabung membangun solusi data-first untuk brand regional dan nasional.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="saas">
+        <div class="container">
+          <h2 class="section-title">Software as a Service</h2>
+          <p class="section-lead">Selain consulting, Nalar juga membangun produk SaaS untuk membantu tim bisnis bergerak lebih cepat.</p>
+          <div class="saas-products">
+            <article class="card saas-featured" id="untung">
+              <h3>Untung</h3>
+              <p>
+                Platform intelligence untuk monitoring KPI bisnis real-time, membaca pola pertumbuhan, dan memberi
+                rekomendasi aksi berbasis AI dalam satu dashboard.
+              </p>
+            </article>
+            <article class="card" id="jurnal">
+              <h3>Jurnal</h3>
+              <p>
+                Workspace insight periodik untuk merangkum performa bisnis, membaca tren mingguan, dan menyusun
+                prioritas aksi tim growth.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="container">
+          <h2 class="section-title">Accelerate Data &amp; AI Adoption</h2>
+          <p class="section-lead">
+            Struktur layanan kami meniru ritme consulting modern: mulai dari arah strategis, delivery teknis, sampai
+            adopsi tim agar solusi tidak berhenti di slide.
+          </p>
+          <div class="services-grid">
+            <article class="card">
+              <h3>Strategy &amp; Transformation</h3>
+              <p>Roadmap data/AI, prioritasi use case, operating model, dan change management untuk eksekusi lintas fungsi.</p>
+            </article>
+            <article class="card">
+              <h3>Generative AI &amp; Agents</h3>
+              <p>Pengembangan assistant, workflow automation, dan custom AI agent yang relevan untuk kebutuhan bisnis inti.</p>
+            </article>
+            <article class="card">
+              <h3>Data Foundations &amp; BI</h3>
+              <p>Data governance, kualitas data, dashboard executive, serta insight layer untuk keputusan cepat dan akurat.</p>
+            </article>
+            <article class="card">
+              <h3>Marketing Data &amp; Growth</h3>
+              <p>Optimasi channel, attribution, dan activation berbasis data agar ROI marketing meningkat konsisten.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 class="section-title">Built for Regional Scale</h2>
+          <p class="section-lead">Pendekatan lintas industri dengan standar delivery enterprise, tapi tetap cepat untuk tim produk dan marketing.</p>
+          <div class="stats">
+            <div class="stat"><strong>120+</strong><span>AI &amp; data projects delivered</span></div>
+            <div class="stat"><strong>9</strong><span>Industry verticals covered</span></div>
+            <div class="stat"><strong>34%</strong><span>Avg. uplift on campaign efficiency</span></div>
+            <div class="stat"><strong>4.7/5</strong><span>Client satisfaction score</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases">
+        <div class="container">
+          <h2 class="section-title">Client Cases</h2>
+          <p class="section-lead">Contoh outcome yang kami kejar: dampak bisnis yang terukur, bukan sekadar implementasi teknologi.</p>
+          <div class="cases">
+            <article class="case">
+              <small>Retail Group</small>
+              <h3>Demand Forecasting &amp; Promo Intelligence</h3>
+              <p>Meningkatkan akurasi forecast 23% dan menurunkan stockout pada top 200 SKU nasional.</p>
+            </article>
+            <article class="case">
+              <small>Banking</small>
+              <h3>GenAI Knowledge Assistant for RM Team</h3>
+              <p>Mempercepat response relationship manager, memangkas waktu pencarian dokumen hingga 52%.</p>
+            </article>
+            <article class="case">
+              <small>Consumer Brand</small>
+              <h3>Marketing Mix &amp; Creative Performance Lab</h3>
+              <p>Naikkan marketing ROI 31% dengan eksperimentasi terstruktur dan pemodelan attribution.</p>
+            </article>
+          </div>
+
+          <div class="cta" id="contact">
+            <h3>Ready to move from idea to impact?</h3>
+            <p>Diskusikan prioritas Data, AI, dan Marketing tim kamu. Kami siapkan sesi discovery 45 menit tanpa biaya.</p>
+            <a class="btn" href="mailto:hello@nalar.ai">hello@nalar.ai</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2026 Nalar. Data, AI &amp; Marketing Consulting.</div>
+    </footer>
+    <script>
+      const saasToggle = document.getElementById("saasToggle");
+      const saasMenu = document.getElementById("saasMenu");
+      const mobileNavToggle = document.getElementById("mobileNavToggle");
+      const mobileSaasToggle = document.getElementById("mobileSaasToggle");
+      const mobileNavMenu = document.getElementById("mobileNavMenu");
+      const mobileSaasMenu = document.getElementById("mobileSaasMenu");
+      const focusValue = document.getElementById("focusValue");
+
+      if (saasToggle && saasMenu) {
+        saasToggle.addEventListener("click", () => {
+          const isOpen = saasMenu.classList.toggle("open");
+          saasToggle.classList.toggle("active", isOpen);
+          saasToggle.setAttribute("aria-expanded", String(isOpen));
+          saasToggle.textContent = isOpen ? "SaaS ▲" : "SaaS ▼";
+        });
+
+        saasMenu.querySelectorAll("a").forEach((item) => {
+          item.addEventListener("click", () => {
+            saasMenu.classList.remove("open");
+            saasToggle.classList.remove("active");
+            saasToggle.setAttribute("aria-expanded", "false");
+            saasToggle.textContent = "SaaS ▼";
+          });
+        });
+
+        document.addEventListener("mousedown", (event) => {
+          if (!saasMenu.classList.contains("open")) return;
+          const clickInsideMenu = saasMenu.contains(event.target);
+          const clickOnToggle = saasToggle.contains(event.target);
+          if (!clickInsideMenu && !clickOnToggle) {
+            saasMenu.classList.remove("open");
+            saasToggle.classList.remove("active");
+            saasToggle.setAttribute("aria-expanded", "false");
+            saasToggle.textContent = "SaaS ▼";
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            saasMenu.classList.remove("open");
+            saasToggle.classList.remove("active");
+            saasToggle.setAttribute("aria-expanded", "false");
+            saasToggle.textContent = "SaaS ▼";
+          }
+        });
+      }
+
+      if (mobileNavToggle && mobileNavMenu && mobileSaasToggle && mobileSaasMenu) {
+        mobileNavToggle.addEventListener("click", () => {
+          const isOpen = mobileNavMenu.classList.toggle("open");
+          mobileSaasMenu.classList.remove("open");
+          mobileNavToggle.textContent = isOpen ? "Menu ✕" : "Menu ☰";
+          mobileSaasToggle.textContent = "SaaS ▼";
+        });
+
+        mobileSaasToggle.addEventListener("click", () => {
+          const isOpen = mobileSaasMenu.classList.toggle("open");
+          mobileNavMenu.classList.remove("open");
+          mobileSaasToggle.textContent = isOpen ? "SaaS ▲" : "SaaS ▼";
+          mobileNavToggle.textContent = "Menu ☰";
+        });
+
+        document.querySelectorAll("#mobileNavMenu a, #mobileSaasMenu a").forEach((item) => {
+          item.addEventListener("click", () => {
+            mobileNavMenu.classList.remove("open");
+            mobileSaasMenu.classList.remove("open");
+            mobileNavToggle.textContent = "Menu ☰";
+            mobileSaasToggle.textContent = "SaaS ▼";
+          });
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 900) {
+            mobileNavMenu.classList.remove("open");
+            mobileSaasMenu.classList.remove("open");
+            mobileNavToggle.textContent = "Menu ☰";
+            mobileSaasToggle.textContent = "SaaS ▼";
+          }
+        });
+      }
+
+      if (focusValue) {
+        const topics = ["Revenue Growth", "Operational Efficiency", "Marketing ROI"];
+        let index = 0;
+        setInterval(() => {
+          index = (index + 1) % topics.length;
+          focusValue.textContent = topics[index];
+        }, 2400);
+      }
+    </script>
+  </body>
+</html>

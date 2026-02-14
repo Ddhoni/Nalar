@@ -1,0 +1,13 @@
+:3000
+
+file_server {
+    root /srv
+}
+
+# Cache static assets
+header /css/* Cache-Control "public, max-age=31536000, immutable"
+header /js/* Cache-Control "public, max-age=31536000, immutable"
+header /images/* Cache-Control "public, max-age=604800"
+
+# Redirect API calls to backend
+reverse_proxy /api/* http://api:8080
